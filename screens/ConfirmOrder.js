@@ -5,13 +5,13 @@ import { AppTheme } from "../AppTheme"
 import LottieView from "lottie-react-native";
 import { CustomButton } from "../components/CustomButton";
 
-export const ConfirmOrder = () => {
+export const ConfirmOrder = ({ navigation }) => {
     useFocusEffect(
         useCallback(() => {
             const back = BackHandler.addEventListener(
                 "hardwareBackPress",
                 () => {
-                    return false;
+                    return true;
                 }
             )
             return () => {
@@ -19,6 +19,14 @@ export const ConfirmOrder = () => {
             }
         }, [])
     )
+
+    function goToHome() {
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home' }], // Replace 'Home' with your actual home route name
+        });
+    }
+
     return (
         <>
             <View style={{ flex: 1, backgroundColor: AppTheme.white, paddingHorizontal: 97, paddingVertical: 160, alignItems: 'center' }}>
@@ -52,17 +60,9 @@ export const ConfirmOrder = () => {
                     width: '100%'
 
                 }}>
-                    <CustomButton text={"Track My Order"} />
+                    <CustomButton text={"BACK"} onPress={goToHome} />
                 </View>
 
-                <View style={{
-                    height: 56,
-                    marginTop: 56,
-                    width: '100%'
-
-                }}>
-                    <CustomButton text={"Continue shopping"} />
-                </View>
             </View>
         </>
     )
