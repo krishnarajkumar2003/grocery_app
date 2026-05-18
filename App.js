@@ -1,16 +1,20 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { StackNavigation } from './navigations/StackNavigator'
-import { View } from 'react-native'
+import { DrawerNavigation } from './navigations/DrawerNavigator'
 import { AppTheme } from './AppTheme'
+import { NavigationContainer } from "@react-navigation/native"
 
-console.log = () => { }
-console.warn = () => { }
-console.error = () => { }
+// ⚠️ Don't kill errors completely in dev
+
+  console.log = () => {}
+  console.warn = () => {}
+  console.error = () => {}
 
 export const App = () => {
-  return <>
+  return (
     <SafeAreaView style={{ flex: 1, backgroundColor: AppTheme.white }}>
-      <StackNavigation />
+      <NavigationContainer>
+        <DrawerNavigation />
+      </NavigationContainer>
     </SafeAreaView>
-  </>
+  )
 }

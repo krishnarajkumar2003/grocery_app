@@ -5,5 +5,7 @@ export const AppScreens = {
     authentication:'Authentication',
     saladDetails:'SaladDetails',
     cart:'Cart',
-    confirmOrder:'ConfirmOrder'
+    confirmOrder:'ConfirmOrder',
+    drawer:'Drawer',
+    stack:'Stack'
 }

@@ -32,28 +32,31 @@ export const SaladDetailsScreen = ({ route }) => {
         }
     }
 
-    const addToBasket = useCallback(async (salad) => {
+    const addToBasket = async (salad) => {
         try {
-            let item = data;
-            item = {
-                ...item,
+            let item = {
+                ...salad,
                 quantity: quantity
-            }
-            let salads = JSON.parse(await AsyncStorage.getItem('cart')) || []
-            const isDuplicate = salads.find((item) => item.is === salad.id)
-            console.log('--12121s', salads)
+            };
+
+            let salads = JSON.parse(await AsyncStorage.getItem('cart')) || [];
+
+            const isDuplicate = salads.find((i) => i.id === salad.id);
+
             if (isDuplicate) {
-                Alert.alert(`Salad already in cart.`)
-            } else {
-                console.log('----> SLAARDs', salads)
-                salads = [...salads, item]
-                console.log('----> SLAARDs new adddd', salads)
-                await AsyncStorage.setItem('cart', JSON.stringify(salads))
+                Alert.alert("Item already in cart");
+                return;
             }
+
+            const updatedCart = [...salads, item];
+
+            await AsyncStorage.setItem('cart', JSON.stringify(updatedCart));
+
         } catch (error) {
-            Alert.alert(`Something went wrong. Try again later.`)
+            console.log(error);
+            Alert.alert("Something went wrong. Try again later.");
         }
-    }, [])
+    };
 
     return (
         <ScrollView
